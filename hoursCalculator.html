@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta author="Matthew Martin" />
+		<meta description="Used to change minutes into appropriate decimal value and total all hours and minutes" />
+		<title>Calculate Hours</title>
+		<style>
+
+			.hour {
+
+				position: absolute;
+				left: 100px;
+				width: 50px;
+			}
+
+			.min {
+
+				position: absolute;
+				left: 160px;
+				width: 50px;
+			}
+
+			.left {
+				position: relative;
+				width: 100px;
+			}
+
+			.result {
+				position: absolute;
+				background-color: #CCCCCC;
+				left: 160px;
+				width: 60px;
+				height: 25px;
+				font-weight: bold;
+			}
+
+		</style> 
+	</head>
+
+	<body>
+		<form action="" id="hourcalc" onsubmit="return false;">
+			<label class="left">Days</label>
+			<label class="hour">Hours</label>
+			<label class="min">Minutes</label>
+			<br />
+			<hr style="width:225px; position: relative; margin-right: 90%"/>
+
+			<label class="left">Monday</label>
+			<input type="text" id="mondayHour" class="hour" name ="mondayHour">
+			<input type="text" id="mondayMin" class="min" name ="mondayMin">
+			<br /><br />
+
+			<label class="left">Tuesday</label>
+			<input type="text" id="tuesdayHour" class="hour" name ="tuesdayHour"> 
+			<input type="text" id="tuesdayMin" class="min" name ="tuesdayMin">
+			<br /><br />
+
+			<label class="left">Wendesday</label>
+			<input type="text" id="wednesdayHour" class="hour" name ="wednesdayHour">
+			<input type="text" id="wednesdayMin" class="min" name="wednesdayMin">
+			<br /><br />
+
+			<label class="left">Thursday</label>
+			<input type="text" id="thursdayHour" class="hour" name ="thursdayHour">
+			<input type="text" id="thursdayMin" class="min" name ="thursdayMin">
+			<br /><br />
+
+			<label class="left">Friday</label>
+			<input type="text" id="fridayHour" class="hour" name ="fridayHour">
+			<input type="text" id="fridayMin" class="min" name ="fridayMin">
+			<br /><br />
+
+			<label class="left">Saturday</label>
+			<input type="text" id="saturdayHour" class="hour" name ="saturdayHour">
+			<input type="text" id="saturdayMin" class="min" name ="saturdayMin">
+			<br /><br />
+
+			<label class="left">Sunday</label>
+			<input type="text" id="sundayHour" class="hour" name ="sundayHour">
+			<input type="text" id="sundayMin" class="min" name ="sundayMin">
+			<br /><br />
+
+			<label id="total" class="result" name="total">Total</label>
+			<button id="calc" onclick="calcMins()">Calculate</button>
+		</form>
+	</body>
+
+	<script type="text/javascript">
+		function calcMins() {
+
+			var theForm = document.forms["hourcalc"];
+
+			var dayMins = ["mondayMin", "tuesdayMin", "wednesdayMin", "thursdayMin",
+							"fridayMin", "saturdayMin", "sundayMin" ];
+
+			var dayHours = ["mondayHour", "tuesdayHour", "wednesdayHour", "thursdayHour", 
+							"fridayHour", "saturdayHour", "sundayHour"];
+
+			var totalMins = 0;
+			var totalHours = 0;
+			var quantity = 0;
+
+			for (var i=0; i < 7; i++) {
+
+				quantity = theForm.elements[dayMins[i]];
+
+				if(quantity.value != ""){
+					totalMins += parseInt(quantity.value);
+				}
+
+				quantity = theForm.elements[dayHours[i]];
+
+				if(quantity.value != ""){
+					totalHours += parseInt(quantity.value);
+				}
+			}
+
+			totalMins = parseFloat(totalMins / 60);
+			totalHours += totalMins;
+
+			document.getElementById("total").innerHTML = totalHours;
+		}
+
+	</script>
+
+</html>
